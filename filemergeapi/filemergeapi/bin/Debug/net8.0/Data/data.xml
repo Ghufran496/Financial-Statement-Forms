@@ -1,0 +1,78 @@
+﻿<Root>
+	<CourtName>Ontario Superior Court of Justice</CourtName>
+	<CourtAddress>361 University Ave, Toronto, ON</CourtAddress>
+
+	<Applicant>
+		<FirstName>John</FirstName>
+		<LastName>Doe</LastName>
+		<CurrentAddress>456 Maple Street, Toronto, ON</CurrentAddress>
+		<PhoneNumber>416-123-4567</PhoneNumber>
+		<EmailAddress>john.doe@example.com</EmailAddress>
+		<ProvinceOrStateOfResidence>Ontario</ProvinceOrStateOfResidence>
+	</Applicant>
+
+	<Respondent>
+		<FirstName>Jane</FirstName>
+		<LastName>Smith</LastName>
+		<CurrentAddress>789 Queen Street, Ottawa, ON</CurrentAddress>
+		<PhoneNumber>613-765-4321</PhoneNumber>
+		<EmailAddress>jane.smith@example.com</EmailAddress>
+	</Respondent>
+
+	<Incomes>
+		<EmployerName>ABC Tech</EmployerName>
+		<EmployerAddress>100 King St, Toronto, ON</EmployerAddress>
+		<CompanyName>Doe Consulting</CompanyName>
+		<CompanyAddress>123 Freelancer Lane, Toronto, ON</CompanyAddress>
+		<NotEmployedSince>2022-01-15</NotEmployedSince>
+		<GrossIncome>95000</GrossIncome>
+	</Incomes>
+
+	<IncomeEarners>
+		<AdultList>Father, Aunt</AdultList>
+		<ChildrenQuantity>2</ChildrenQuantity>
+		<PartnerWorksAt>XYZ Services</PartnerWorksAt>
+		<PartnerEarnings>62000</PartnerEarnings>
+		<PartnerPaymentFrequency>year</PartnerPaymentFrequency>
+		<ContributionAmount>800</ContributionAmount>
+		<ContributionPaymentFrequency>month</ContributionPaymentFrequency>
+	</IncomeEarners>
+
+	<ExSpouse>
+		<DateOfMarriage>2010-06-01</DateOfMarriage>
+		<SeparationDate>2023-05-15</SeparationDate>
+	</ExSpouse>
+	
+	<IncomesSources>
+		<Income>
+			<Source>Employment Income</Source>
+			<Amount>5000</Amount>
+		</Income>
+		<Income>
+			<Source>Rental Income</Source>
+			<Amount>1200</Amount>
+		</Income>
+		<Income>
+			<Source>Investment Dividends</Source>
+			<Amount>750</Amount>
+		</Income>
+	</IncomesSources>
+	
+	<IncomesOther>
+		<Benefit>
+			<Item>Company Car</Item>
+			<Details>2022 Toyota Camry</Details>
+			<YearlyMarketValue>6000</YearlyMarketValue>
+		</Benefit>
+		<Benefit>
+			<Item>Health Insurance</Item>
+			<Details>Family Coverage Plan</Details>
+			<YearlyMarketValue>3600</YearlyMarketValue>
+		</Benefit>
+		<Benefit>
+			<Item>Gym Membership</Item>
+			<Details>Corporate Fitness Plan</Details>
+			<YearlyMarketValue>1200</YearlyMarketValue>
+		</Benefit>
+	</IncomesOther>
+</Root>

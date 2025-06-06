@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Merge API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="file"] {
+            display: block;
+            margin-top: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Document Merge API</h1>
+    
+    <div class="container">
+        <h2>Upload Word Document</h2>
+        <p>Upload a Word document with placeholders in the format <code>&lt;# &lt;Content Select="./Path/To/Element" /&gt; #&gt;</code> to merge with XML data.</p>
+        
+        <div class="form-group">
+            <label for="docFile">Select Word Document:</label>
+            <input type="file" id="docFile" accept=".docx" />
+        </div>
+        
+        <button id="uploadBtn">Merge Document</button>
+        
+        <div id="result">
+            <h3>Result</h3>
+            <div id="resultContent"></div>
+            <div id="downloadLink"></div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('uploadBtn').addEventListener('click', async () => {
+            const fileInput = document.getElementById('docFile');
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+            const downloadLinkDiv = document.getElementById('downloadLink');
+            
+            if (!fileInput.files || fileInput.files.length === 0) {
+                resultDiv.style.display = 'block';
+                resultContent.innerHTML = '<p class="error">Please select a file first.</p>';
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            resultDiv.style.display = 'block';
+            resultContent.innerHTML = '<p>Processing document...</p>';
+            downloadLinkDiv.innerHTML = '';
+            
+            try {
+                const response = await fetch('/api/DocumentMerge/merge', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const filename = file.name.replace('.docx', '_merged.docx');
+                    
+                    resultContent.innerHTML = '<p class="success">Document merged successfully!</p>';
+                    downloadLinkDiv.innerHTML = `<a href="${url}" download="${filename}">Download Merged Document</a>`;
+                } else {
+                    const error = await response.text();
+                    resultContent.innerHTML = `<p class="error">Error: ${error}</p>`;
+                }
+            } catch (error) {
+                resultContent.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html> 

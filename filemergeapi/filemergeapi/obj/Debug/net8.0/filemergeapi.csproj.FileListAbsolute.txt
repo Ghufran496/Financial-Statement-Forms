@@ -1,0 +1,91 @@
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\appsettings.json
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.staticwebassets.endpoints.json
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.exe
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.deps.json
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.runtimeconfig.json
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.pdb
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.csproj.AssemblyReference.cache
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.AssemblyInfoInputs.cache
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.AssemblyInfo.cs
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.csproj.CoreCompileInputs.cache
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\scopedcss\bundle\filemergeapi.styles.css
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets\msbuild.filemergeapi.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets\msbuild.filemergeapi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets\msbuild.build.filemergeapi.props
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.filemergeapi.props
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.filemergeapi.props
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemerg.C694B61F.Up2Date
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\refint\filemergeapi.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.pdb
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.genruntimeconfig.cache
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\ref\filemergeapi.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\DocumentFormat.OpenXml.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\DocumentFormat.OpenXml.Framework.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\System.IO.Packaging.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Xceed.Document.NET.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Xceed.Drawing.NET.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Xceed.Words.NET.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\SkiaSharp.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\runtimes\osx\native\libSkiaSharp.dylib
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\runtimes\win-arm64\native\libSkiaSharp.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\runtimes\win-x64\native\libSkiaSharp.dll
+C:\Users\awais\Desktop\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\runtimes\win-x86\native\libSkiaSharp.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\appsettings.Development.json
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\appsettings.json
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.staticwebassets.endpoints.json
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.exe
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.deps.json
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.runtimeconfig.json
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.pdb
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\DocumentFormat.OpenXml.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\DocumentFormat.OpenXml.Framework.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Xceed.Document.NET.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Xceed.Drawing.NET.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Xceed.Words.NET.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\SkiaSharp.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\System.IO.Packaging.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\runtimes\osx\native\libSkiaSharp.dylib
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\runtimes\win-arm64\native\libSkiaSharp.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\runtimes\win-x64\native\libSkiaSharp.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\runtimes\win-x86\native\libSkiaSharp.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.csproj.AssemblyReference.cache
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.GeneratedMSBuildEditorConfig.editorconfig
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.AssemblyInfoInputs.cache
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.AssemblyInfo.cs
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.csproj.CoreCompileInputs.cache
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.MvcApplicationPartsAssemblyInfo.cs
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.MvcApplicationPartsAssemblyInfo.cache
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\scopedcss\bundle\filemergeapi.styles.css
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets.build.json
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets.build.json.cache
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets.development.json
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemerg.C694B61F.Up2Date
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\refint\filemergeapi.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.pdb
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.genruntimeconfig.cache
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\ref\filemergeapi.dll
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Data\data.xml
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.staticwebassets.runtime.json
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

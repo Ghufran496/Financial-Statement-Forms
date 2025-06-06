@@ -1,0 +1,38 @@
+SAMPLE COURT DOCUMENT
+
+Court: <# <Content Select="./CourtName" /> #>
+Address: <# <Content Select="./CourtAddress" /> #>
+
+APPLICANT INFORMATION
+--------------------
+Name: <# <Content Select="./Applicant/FirstName" /> #> <# <Content Select="./Applicant/LastName" /> #>
+Address: <# <Content Select="./Applicant/CurrentAddress" /> #>
+Phone: <# <Content Select="./Applicant/PhoneNumber" /> #>
+Email: <# <Content Select="./Applicant/EmailAddress" /> #>
+Province/State: <# <Content Select="./Applicant/ProvinceOrStateOfResidence" /> #>
+
+RESPONDENT INFORMATION
+--------------------
+Name: <# <Content Select="./Respondent/FirstName" /> #> <# <Content Select="./Respondent/LastName" /> #>
+Address: <# <Content Select="./Respondent/CurrentAddress" /> #>
+Phone: <# <Content Select="./Respondent/PhoneNumber" /> #>
+Email: <# <Content Select="./Respondent/EmailAddress" /> #>
+
+INCOME SOURCES
+------------
+<# <Table Select="./IncomesSources" /> #>
+
+OTHER BENEFITS
+------------
+<# <Table Select="./IncomesOther" /> #>
+
+MARRIAGE INFORMATION
+------------------
+Date of Marriage: <# <Content Select="./ExSpouse/DateOfMarriage" /> #>
+Separation Date: <# <Content Select="./ExSpouse/SeparationDate" /> #>
+
+EMPLOYER INFORMATION
+------------------
+Employer: <# <Content Select="./Incomes/EmployerName" /> #>
+Employer Address: <# <Content Select="./Incomes/EmployerAddress" /> #>
+Gross Annual Income: $<# <Content Select="./Incomes/GrossIncome" /> #> 
