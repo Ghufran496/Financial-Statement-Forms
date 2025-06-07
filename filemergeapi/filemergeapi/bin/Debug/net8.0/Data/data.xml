@@ -75,4 +75,448 @@
 			<YearlyMarketValue>1200</YearlyMarketValue>
 		</Benefit>
 	</IncomesOther>
+
+	<!-- Adding Monthly Deductions Table -->
+	<MonthlyDeductions>
+		<Deduction>
+			<Expense>Income Tax</Expense>
+			<Value>1250</Value>
+		</Deduction>
+		<Deduction>
+			<Expense>CPP</Expense>
+			<Value>350</Value>
+		</Deduction>
+		<Deduction>
+			<Expense>EI Premiums</Expense>
+			<Value>120</Value>
+		</Deduction>
+		<Deduction>
+			<Expense>Union Dues</Expense>
+			<Value>75</Value>
+		</Deduction>
+		<Deduction>
+			<Expense>Pension Contributions</Expense>
+			<Value>450</Value>
+		</Deduction>
+	</MonthlyDeductions>
+	
+	<!-- Adding Housing Expenses -->
+	<Housing>
+		<ExpenseItem>
+			<Expense>Rent/Mortgage</Expense>
+			<Value>2000</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Property Taxes</Expense>
+			<Value>350</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Insurance</Expense>
+			<Value>150</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Condo Fees</Expense>
+			<Value>400</Value>
+		</ExpenseItem>
+	</Housing>
+	
+	<!-- Adding Utilities Expenses -->
+	<Utilities>
+		<ExpenseItem>
+			<Expense>Water</Expense>
+			<Value>75</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Electricity</Expense>
+			<Value>125</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Heating</Expense>
+			<Value>150</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Phone/Internet/Cable</Expense>
+			<Value>180</Value>
+		</ExpenseItem>
+	</Utilities>
+	
+	<!-- Adding Household Expenses -->
+	<HouseHold>
+		<ExpenseItem>
+			<Expense>Groceries</Expense>
+			<Value>800</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Household Supplies</Expense>
+			<Value>150</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Repairs &amp; Maintenance</Expense>
+			<Value>200</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Yard Maintenance</Expense>
+			<Value>100</Value>
+		</ExpenseItem>
+	</HouseHold>
+	
+	<!-- Adding Child Care Expenses -->
+	<ChildCare>
+		<ExpenseItem>
+			<Expense>Daycare</Expense>
+			<Value>1200</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Babysitting</Expense>
+			<Value>250</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Children's Activities</Expense>
+			<Value>300</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Children's Education</Expense>
+			<Value>400</Value>
+		</ExpenseItem>
+	</ChildCare>
+	
+	<!-- Adding Transportation Expenses -->
+	<Transportation>
+		<ExpenseItem>
+			<Expense>Car Payments</Expense>
+			<Value>450</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Car Insurance</Expense>
+			<Value>200</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Gas</Expense>
+			<Value>300</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Car Maintenance</Expense>
+			<Value>100</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Public Transit</Expense>
+			<Value>120</Value>
+		</ExpenseItem>
+	</Transportation>
+	
+	<!-- Adding Health Expenses -->
+	<Health>
+		<ExpenseItem>
+			<Expense>Health Insurance Premiums</Expense>
+			<Value>250</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Dental Expenses</Expense>
+			<Value>150</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Medicine &amp; Drugs</Expense>
+			<Value>100</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Eye Care</Expense>
+			<Value>50</Value>
+		</ExpenseItem>
+	</Health>
+	
+	<!-- Adding Personal Expenses -->
+	<PersonalExpenses>
+		<ExpenseItem>
+			<Expense>Clothing</Expense>
+			<Value>200</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Hair Care/Personal Care</Expense>
+			<Value>100</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Entertainment/Recreation</Expense>
+			<Value>250</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Gifts</Expense>
+			<Value>100</Value>
+		</ExpenseItem>
+	</PersonalExpenses>
+	
+	<!-- Adding Other Expenses -->
+	<OtherExpenses>
+		<ExpenseItem>
+			<Expense>Support Payments</Expense>
+			<Value>1000</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Debt Payments</Expense>
+			<Value>500</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>Life Insurance</Expense>
+			<Value>150</Value>
+		</ExpenseItem>
+		<ExpenseItem>
+			<Expense>RRSP Contributions</Expense>
+			<Value>400</Value>
+		</ExpenseItem>
+	</OtherExpenses>
+	
+	<!-- Adding Land Properties -->
+	<Lands>
+		<Property>
+			<Address>123 Main Street, Toronto, ON</Address>
+			<EstimatedValueOnMarriageDate>450000</EstimatedValueOnMarriageDate>
+			<EstimatedValueOnValuationDate>650000</EstimatedValueOnValuationDate>
+			<EstimatedValueToday>700000</EstimatedValueToday>
+		</Property>
+		<Property>
+			<Address>456 Cottage Lane, Muskoka, ON</Address>
+			<EstimatedValueOnMarriageDate>250000</EstimatedValueOnMarriageDate>
+			<EstimatedValueOnValuationDate>375000</EstimatedValueOnValuationDate>
+			<EstimatedValueToday>400000</EstimatedValueToday>
+		</Property>
+	</Lands>
+	
+	<!-- Adding Household Items -->
+	<HouseItems>
+		<Item>
+			<Name>Furniture</Name>
+			<Description>Living room, bedroom, dining sets</Description>
+			<IsInYourPossession>Yes</IsInYourPossession>
+			<EstimatedValueOnMarriageDate>5000</EstimatedValueOnMarriageDate>
+			<EstimatedValueOnValuationDate>3000</EstimatedValueOnValuationDate>
+			<EstimatedValueToday>2500</EstimatedValueToday>
+		</Item>
+		<Item>
+			<Name>Vehicles</Name>
+			<Description>2019 Honda Accord</Description>
+			<IsInYourPossession>Yes</IsInYourPossession>
+			<EstimatedValueOnMarriageDate>0</EstimatedValueOnMarriageDate>
+			<EstimatedValueOnValuationDate>25000</EstimatedValueOnValuationDate>
+			<EstimatedValueToday>20000</EstimatedValueToday>
+		</Item>
+		<Item>
+			<Name>Electronics</Name>
+			<Description>TVs, computers, appliances</Description>
+			<IsInYourPossession>Yes</IsInYourPossession>
+			<EstimatedValueOnMarriageDate>3000</EstimatedValueOnMarriageDate>
+			<EstimatedValueOnValuationDate>4000</EstimatedValueOnValuationDate>
+			<EstimatedValueToday>3500</EstimatedValueToday>
+		</Item>
+	</HouseItems>
+	
+	<!-- Adding Bank Accounts -->
+	<Bank>
+		<Account>
+			<Category>Checking Account</Category>
+			<Institution>TD Bank</Institution>
+			<Description>Primary checking account</Description>
+			<AccountNumber>*****6789</AccountNumber>
+			<EstimatedValueOnMarriageDate>5000</EstimatedValueOnMarriageDate>
+			<EstimatedValueOnValuationDate>7500</EstimatedValueOnValuationDate>
+			<EstimatedValueToday>8000</EstimatedValueToday>
+		</Account>
+		<Account>
+			<Category>Savings Account</Category>
+			<Institution>RBC</Institution>
+			<Description>Emergency fund</Description>
+			<AccountNumber>*****1234</AccountNumber>
+			<EstimatedValueOnMarriageDate>10000</EstimatedValueOnMarriageDate>
+			<EstimatedValueOnValuationDate>25000</EstimatedValueOnValuationDate>
+			<EstimatedValueToday>27500</EstimatedValueToday>
+		</Account>
+		<Account>
+			<Category>RRSP</Category>
+			<Institution>Scotiabank</Institution>
+			<Description>Retirement savings</Description>
+			<AccountNumber>*****5678</AccountNumber>
+			<EstimatedValueOnMarriageDate>15000</EstimatedValueOnMarriageDate>
+			<EstimatedValueOnValuationDate>95000</EstimatedValueOnValuationDate>
+			<EstimatedValueToday>105000</EstimatedValueToday>
+		</Account>
+	</Bank>
+	
+	<!-- Adding Life Insurance -->
+	<LifeInsurance>
+		<Policy>
+			<Company>Sun Life</Company>
+			<Type>Term Life</Type>
+			<PolicyNumber>TL-12345678</PolicyNumber>
+			<Owner>John Doe</Owner>
+			<Beneficiary>Jane Smith</Beneficiary>
+			<FaceAmount>500000</FaceAmount>
+			<CashSurrenderValueOnMarriageDate>0</CashSurrenderValueOnMarriageDate>
+			<CashSurrenderValueOnValuationDate>0</CashSurrenderValueOnValuationDate>
+			<CashSurrenderValueToday>0</CashSurrenderValueToday>
+		</Policy>
+		<Policy>
+			<Company>Manulife</Company>
+			<Type>Whole Life</Type>
+			<PolicyNumber>WL-87654321</PolicyNumber>
+			<Owner>John Doe</Owner>
+			<Beneficiary>Children</Beneficiary>
+			<FaceAmount>250000</FaceAmount>
+			<CashSurrenderValueOnMarriageDate>5000</CashSurrenderValueOnMarriageDate>
+			<CashSurrenderValueOnValuationDate>25000</CashSurrenderValueOnValuationDate>
+			<CashSurrenderValueToday>30000</CashSurrenderValueToday>
+		</Policy>
+	</LifeInsurance>
+	
+	<!-- Adding Business Interests -->
+	<Business>
+		<Interest>
+			<CompanyName>Doe Consulting Inc.</CompanyName>
+			<Interest>100%</Interest>
+			<EstimatedMarketValueOnMarriageDate>0</EstimatedMarketValueOnMarriageDate>
+			<EstimatedMarketValueOnValuationDate>150000</EstimatedMarketValueOnValuationDate>
+			<EstimatedMarketValueToday>175000</EstimatedMarketValueToday>
+		</Interest>
+		<Interest>
+			<CompanyName>Tech Investments LLC</CompanyName>
+			<Interest>25%</Interest>
+			<EstimatedMarketValueOnMarriageDate>25000</EstimatedMarketValueOnMarriageDate>
+			<EstimatedMarketValueOnValuationDate>50000</EstimatedMarketValueOnValuationDate>
+			<EstimatedMarketValueToday>60000</EstimatedMarketValueToday>
+		</Interest>
+	</Business>
+	
+	<!-- Adding Money Owed -->
+	<MoneyOwned>
+		<Debt>
+			<Details>Personal loan to brother</Details>
+			<AmountOwedOnMarriageDate>0</AmountOwedOnMarriageDate>
+			<AmountOwedOnValuationDate>15000</AmountOwedOnValuationDate>
+			<AmountOwedToday>10000</AmountOwedToday>
+		</Debt>
+		<Debt>
+			<Details>Tax refund pending</Details>
+			<AmountOwedOnMarriageDate>0</AmountOwedOnMarriageDate>
+			<AmountOwedOnValuationDate>3500</AmountOwedOnValuationDate>
+			<AmountOwedToday>3500</AmountOwedToday>
+		</Debt>
+	</MoneyOwned>
+	
+	<!-- Adding Other Properties -->
+	<OtherProperties>
+		<Property>
+			<Category>Collectibles</Category>
+			<Details>Art collection</Details>
+			<EstimatedValueOnMarriageDate>10000</EstimatedValueOnMarriageDate>
+			<EstimatedValueOnValuationDate>25000</EstimatedValueOnValuationDate>
+			<EstimatedValueToday>30000</EstimatedValueToday>
+		</Property>
+		<Property>
+			<Category>Jewelry</Category>
+			<Details>Watches and rings</Details>
+			<EstimatedValueOnMarriageDate>15000</EstimatedValueOnMarriageDate>
+			<EstimatedValueOnValuationDate>20000</EstimatedValueOnValuationDate>
+			<EstimatedValueToday>22000</EstimatedValueToday>
+		</Property>
+	</OtherProperties>
+	
+	<!-- Adding Liabilities -->
+	<Liabilities>
+		<Liability>
+			<Category>Mortgage</Category>
+			<Details>Primary residence</Details>
+			<AmountOwingOnMarriageDate>350000</AmountOwingOnMarriageDate>
+			<AmountOwingOnValuationDate>250000</AmountOwingOnValuationDate>
+			<AmountOwingToday>240000</AmountOwingToday>
+		</Liability>
+		<Liability>
+			<Category>Car Loan</Category>
+			<Details>2019 Honda Accord</Details>
+			<AmountOwingOnMarriageDate>0</AmountOwingOnMarriageDate>
+			<AmountOwingOnValuationDate>15000</AmountOwingOnValuationDate>
+			<AmountOwingToday>12000</AmountOwingToday>
+		</Liability>
+		<Liability>
+			<Category>Credit Cards</Category>
+			<Details>Various cards</Details>
+			<AmountOwingOnMarriageDate>5000</AmountOwingOnMarriageDate>
+			<AmountOwingOnValuationDate>7500</AmountOwingOnValuationDate>
+			<AmountOwingToday>6000</AmountOwingToday>
+		</Liability>
+		<Liability>
+			<Category>Line of Credit</Category>
+			<Details>Home equity line</Details>
+			<AmountOwingOnMarriageDate>0</AmountOwingOnMarriageDate>
+			<AmountOwingOnValuationDate>25000</AmountOwingOnValuationDate>
+			<AmountOwingToday>20000</AmountOwingToday>
+		</Liability>
+	</Liabilities>
+	
+	<!-- Adding Liabilities on Marriage -->
+	<LiabilitiesOnMarriage>
+		<Item>
+			<CategoryAndDetails>Student Loans</CategoryAndDetails>
+			<AssetsValueOnMarriageDate>0</AssetsValueOnMarriageDate>
+			<LiabilitiesValueOnMarriageDate>35000</LiabilitiesValueOnMarriageDate>
+		</Item>
+		<Item>
+			<CategoryAndDetails>Credit Card Debt</CategoryAndDetails>
+			<AssetsValueOnMarriageDate>0</AssetsValueOnMarriageDate>
+			<LiabilitiesValueOnMarriageDate>5000</LiabilitiesValueOnMarriageDate>
+		</Item>
+		<Item>
+			<CategoryAndDetails>Car Loan</CategoryAndDetails>
+			<AssetsValueOnMarriageDate>0</AssetsValueOnMarriageDate>
+			<LiabilitiesValueOnMarriageDate>12000</LiabilitiesValueOnMarriageDate>
+		</Item>
+	</LiabilitiesOnMarriage>
+	
+	<!-- Adding Excluded Properties -->
+	<ExcludedProperties>
+		<Property>
+			<Category>Inheritance</Category>
+			<Details>From grandfather's estate</Details>
+			<ValueOnValuationDate>75000</ValueOnValuationDate>
+		</Property>
+		<Property>
+			<Category>Gift</Category>
+			<Details>Wedding gift from parents</Details>
+			<ValueOnValuationDate>25000</ValueOnValuationDate>
+		</Property>
+	</ExcludedProperties>
+	
+	<!-- Adding Disposed Properties -->
+	<DisposedProperties>
+		<Property>
+			<Category>Vehicle</Category>
+			<Details>2015 Toyota Camry (sold)</Details>
+			<Value>15000</Value>
+		</Property>
+		<Property>
+			<Category>Investment</Category>
+			<Details>Mutual fund (liquidated)</Details>
+			<Value>35000</Value>
+		</Property>
+	</DisposedProperties>
+	
+	<!-- Adding Child Expenses -->
+	<ChildExpenses>
+		<Expense>
+			<ChildName>Emma Doe</ChildName>
+			<ExpenseName>Private School Tuition</ExpenseName>
+			<ExpenseAmount>15000</ExpenseAmount>
+		</Expense>
+		<Expense>
+			<ChildName>Emma Doe</ChildName>
+			<ExpenseName>Braces</ExpenseName>
+			<ExpenseAmount>6000</ExpenseAmount>
+		</Expense>
+		<Expense>
+			<ChildName>Michael Doe</ChildName>
+			<ExpenseName>Hockey</ExpenseName>
+			<ExpenseAmount>3500</ExpenseAmount>
+		</Expense>
+		<Expense>
+			<ChildName>Michael Doe</ChildName>
+			<ExpenseName>Summer Camp</ExpenseName>
+			<ExpenseAmount>2500</ExpenseAmount>
+		</Expense>
+	</ChildExpenses>
 </Root>
