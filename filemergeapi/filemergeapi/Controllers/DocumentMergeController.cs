@@ -1,5 +1,4 @@
-﻿// Required usings
-using DocumentFormat.OpenXml;
+﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.AspNetCore.Mvc;
@@ -42,30 +41,23 @@ namespace OpenXmlMergeApi.Controllers
                 Directory.CreateDirectory(outputDir);
                 string outputFilePath = Path.Combine(outputDir, Path.GetFileNameWithoutExtension(file.FileName) + "_merged.docx");
 
-                // Create a temporary file to work with
                 string tempFilePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".docx");
                 using (var fileStream = new FileStream(tempFilePath, FileMode.Create))
                 {
                     await file.CopyToAsync(fileStream);
                 }
 
-                // Process the document using the OpenXML SDK
                 using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(tempFilePath, true))
                 {
-                    // Process all paragraphs in the document
                     ProcessDocumentParts(wordDoc, dataXml);
                 }
 
-                // Read the processed file and return it
                 byte[] fileBytes = System.IO.File.ReadAllBytes(tempFilePath);
                 
-                // Clean up the temp file
                 System.IO.File.Delete(tempFilePath);
                 
-                // Save a copy in the output directory
                 await System.IO.File.WriteAllBytesAsync(outputFilePath, fileBytes);
 
-                // Return the file for download
                 return File(fileBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
                     Path.GetFileNameWithoutExtension(file.FileName) + "_merged.docx");
             }
@@ -78,7 +70,6 @@ namespace OpenXmlMergeApi.Controllers
 
         private void ProcessDocumentParts(WordprocessingDocument wordDoc, XDocument dataXml)
         {
-            // Get the main document part
             MainDocumentPart? mainDocumentPart = wordDoc.MainDocumentPart;
             
             if (mainDocumentPart == null || mainDocumentPart.Document == null || mainDocumentPart.Document.Body == null)
@@ -87,28 +78,22 @@ namespace OpenXmlMergeApi.Controllers
                 return;
             }
             
-            // Process the document body
             Body body = mainDocumentPart.Document.Body;
             
-            // First find all table placeholders so we can process tables
             FindAndProcessTablePlaceholders(body, dataXml);
             
-            // Then process content placeholders in paragraphs
             ProcessBodyContent(body, dataXml);
             
-            // Save changes
             mainDocumentPart.Document.Save();
         }
 
         private void ProcessBodyContent(Body body, XDocument dataXml)
         {
-            // First, find all paragraphs and process them
             foreach (var paragraph in body.Elements<Paragraph>())
             {
                 ProcessParagraph(paragraph, dataXml);
             }
             
-            // Process tables separately if needed
             foreach (var table in body.Elements<Table>())
             {
                 ProcessTable(table, dataXml);
@@ -119,12 +104,7 @@ namespace OpenXmlMergeApi.Controllers
         {
             string paragraphText = GetTextFromParagraph(paragraph);
             
-            // Process content placeholders
             ProcessContentPlaceholders(paragraph, paragraphText, dataXml);
-            
-            // We're now handling table placeholders separately at the document level
-            // to avoid duplicating tables
-            // ProcessTablePlaceholders(paragraph, paragraphText, dataXml);
         }
 
         private void ProcessTable(Table table, XDocument dataXml)
@@ -156,8 +136,6 @@ namespace OpenXmlMergeApi.Controllers
 
         private void ProcessContentPlaceholders(Paragraph paragraph, string paragraphText, XDocument dataXml)
         {
-            // Match content placeholders
-            // This regex handles various quote formats and spacing
             Regex contentRegex = new Regex("<#\\s*<Content\\s+Select\\s*=\\s*[\\\"|'](.*?)[\\\"|']\\s*/>\\s*#>");
             MatchCollection matches = contentRegex.Matches(paragraphText);
             
@@ -166,10 +144,8 @@ namespace OpenXmlMergeApi.Controllers
                 
             _logger.LogInformation($"Found {matches.Count} content placeholders in paragraph");
             
-            // Create a list to store the runs that need to be modified
             List<Run> runsToProcess = paragraph.Elements<Run>().ToList();
             
-            // Placeholder to replacement mapping
             Dictionary<string, string> replacements = new Dictionary<string, string>();
             
             foreach (Match match in matches)
@@ -177,10 +153,8 @@ namespace OpenXmlMergeApi.Controllers
                 string placeholder = match.Value;
                 string xpath = match.Groups[1].Value.Trim();
                 
-                // Clean up the XPath expression
-                xpath = CleanXPath(xpath);
+                    xpath = CleanXPath(xpath);
                 
-                // Get the value from XML
                 string value = ResolveXPath(dataXml, xpath);
                 
                 _logger.LogInformation($"Will replace '{placeholder}' with '{value}' (XPath: {xpath})");
@@ -188,27 +162,21 @@ namespace OpenXmlMergeApi.Controllers
                 replacements[placeholder] = value;
             }
             
-            // Get the combined text from all runs
             string combinedText = paragraphText;
             
-            // Apply all replacements
             foreach (var replacement in replacements)
             {
                 combinedText = combinedText.Replace(replacement.Key, replacement.Value);
             }
             
-            // Clear existing runs
             paragraph.RemoveAllChildren<Run>();
             
-            // Add a single run with the processed text
             Run newRun = new Run(new Text(combinedText));
             paragraph.AppendChild(newRun);
         }
 
         private void ProcessTablePlaceholders(Paragraph paragraph, string paragraphText, XDocument dataXml)
         {
-            // Match table placeholders
-            // This regex handles various quote formats and spacing
             Regex tableRegex = new Regex("<#\\s*<Table\\s+Select\\s*=\\s*[\\\"|'](.*?)[\\\"|']\\s*/>\\s*#>");
             MatchCollection matches = tableRegex.Matches(paragraphText);
             
@@ -217,7 +185,6 @@ namespace OpenXmlMergeApi.Controllers
                 
             _logger.LogInformation($"Found {matches.Count} table placeholders in paragraph");
             
-            // Placeholder to replacement mapping
             Dictionary<string, Table> replacements = new Dictionary<string, Table>();
             
             foreach (Match match in matches)
@@ -225,10 +192,8 @@ namespace OpenXmlMergeApi.Controllers
                 string placeholder = match.Value;
                 string xpath = match.Groups[1].Value.Trim();
                 
-                // Clean up the XPath expression
                 xpath = CleanXPath(xpath);
                 
-                // Get the table data
                 Table table = GenerateTableFromXmlData(dataXml, xpath);
                 
                 _logger.LogInformation($"Will replace table placeholder '{placeholder}' with generated table (XPath: {xpath})");
@@ -236,10 +201,8 @@ namespace OpenXmlMergeApi.Controllers
                 replacements[placeholder] = table;
             }
             
-            // If we found replacements
             if (replacements.Count > 0)
             {
-                // Get parent of paragraph
                 var parent = paragraph.Parent;
                 if (parent == null)
                 {
@@ -247,10 +210,8 @@ namespace OpenXmlMergeApi.Controllers
                     return;
                 }
                 
-                // Insert tables after the paragraph
                 foreach (var replacement in replacements)
                 {
-                    // Create a new paragraph with the text before the placeholder
                     string beforePlaceholder = paragraphText.Substring(0, paragraphText.IndexOf(replacement.Key));
                     if (!string.IsNullOrWhiteSpace(beforePlaceholder))
                     {
@@ -258,21 +219,17 @@ namespace OpenXmlMergeApi.Controllers
                         parent.InsertBefore(beforePara, paragraph);
                     }
                     
-                    // Insert the table
                     parent.InsertBefore(replacement.Value, paragraph);
                     
-                    // Update paragraph text for next iteration
                     paragraphText = paragraphText.Substring(paragraphText.IndexOf(replacement.Key) + replacement.Key.Length);
                 }
                 
-                // Create a paragraph with any remaining text
                 if (!string.IsNullOrWhiteSpace(paragraphText))
                 {
                     Paragraph afterPara = new Paragraph(new Run(new Text(paragraphText)));
                     parent.InsertBefore(afterPara, paragraph);
                 }
                 
-                // Remove the original paragraph
                 parent.RemoveChild(paragraph);
             }
         }
@@ -281,7 +238,6 @@ namespace OpenXmlMergeApi.Controllers
         {
             try
             {
-                // Split the XPath into parts
                 var parts = xpath.Split('/').Where(p => !string.IsNullOrEmpty(p)).ToArray();
                 
                 XElement? tableElement = xml.Root;
@@ -298,15 +254,12 @@ namespace OpenXmlMergeApi.Controllers
                 if (tableElement == null)
                     return new Table();
                 
-                // Get all child elements which will be rows in our table
                 var rows = tableElement.Elements().ToList();
                 if (!rows.Any())
                     return new Table();
                 
-                // Create the table
-                Table table = new Table();
+                    Table table = new Table();
                 
-                // Add table properties
                 TableProperties tableProps = new TableProperties(
                     new TableBorders(
                         new TopBorder() { Val = BorderValues.Single, Size = 12 },
@@ -319,11 +272,9 @@ namespace OpenXmlMergeApi.Controllers
                 );
                 table.AppendChild(tableProps);
                 
-                // Get column names from first row's element names
                 var firstRow = rows.First();
                 var columnNames = firstRow.Elements().Select(e => e.Name.LocalName).ToList();
                 
-                // Add header row
                 TableRow headerRow = new TableRow();
                 foreach (var columnName in columnNames)
                 {
@@ -337,7 +288,6 @@ namespace OpenXmlMergeApi.Controllers
                 }
                 table.AppendChild(headerRow);
                 
-                // Add data rows
                 foreach (var row in rows)
                 {
                     TableRow tableRow = new TableRow();
@@ -365,15 +315,11 @@ namespace OpenXmlMergeApi.Controllers
 
         private string CleanXPath(string xpath)
         {
-            // Remove leading ./ if present
             if (xpath.StartsWith("./"))
                 xpath = xpath.Substring(2);
                 
-            // Fix spacing issues in XPath expressions (common in Word documents)
-            // First remove any spaces around the slashes
             xpath = Regex.Replace(xpath, @"\s*/\s*", "/");
             
-            // Now fix any remaining spaces within path segments
             xpath = Regex.Replace(xpath, @"\s+", "");
             
             _logger.LogInformation($"Cleaned XPath from input to: {xpath}");
@@ -385,7 +331,6 @@ namespace OpenXmlMergeApi.Controllers
         {
             try
             {
-                // Split the XPath into parts
                 var parts = xpath.Split('/').Where(p => !string.IsNullOrEmpty(p)).ToArray();
                 
                 XElement? current = xml.Root;
@@ -412,7 +357,6 @@ namespace OpenXmlMergeApi.Controllers
         {
             try
             {
-                // Split the XPath into parts
                 var parts = xpath.Split('/').Where(p => !string.IsNullOrEmpty(p)).ToArray();
                 
                 XElement? tableElement = xml.Root;
@@ -429,22 +373,17 @@ namespace OpenXmlMergeApi.Controllers
                 if (tableElement == null)
                     return string.Empty;
                 
-                // Get all child elements which will be rows in our table
                 var rows = tableElement.Elements().ToList();
                 if (!rows.Any())
                     return string.Empty;
                 
-                // Build HTML table
                 StringBuilder tableHtml = new StringBuilder();
                 
-                // Get column names from first row's element names
                 var firstRow = rows.First();
                 var columnNames = firstRow.Elements().Select(e => e.Name.LocalName).ToList();
                 
-                // Start table
                 tableHtml.AppendLine("<table>");
                 
-                // Add header row
                 tableHtml.AppendLine("<tr>");
                 foreach (var columnName in columnNames)
                 {
@@ -452,7 +391,6 @@ namespace OpenXmlMergeApi.Controllers
                 }
                 tableHtml.AppendLine("</tr>");
                 
-                // Add data rows
                 foreach (var row in rows)
                 {
                     tableHtml.AppendLine("<tr>");
@@ -465,7 +403,6 @@ namespace OpenXmlMergeApi.Controllers
                     tableHtml.AppendLine("</tr>");
                 }
                 
-                // End table
                 tableHtml.AppendLine("</table>");
                 
                 return tableHtml.ToString();
@@ -477,100 +414,83 @@ namespace OpenXmlMergeApi.Controllers
             }
         }
 
-        [HttpGet("download/{fileName}")]
-        public IActionResult DownloadFile(string fileName)
-        {
-            string outputDir = Path.Combine(Directory.GetCurrentDirectory(), "Output");
-            string filePath = Path.Combine(outputDir, fileName);
+        // [HttpGet("download/{fileName}")]
+        // public IActionResult DownloadFile(string fileName)
+        // {
+        //     string outputDir = Path.Combine(Directory.GetCurrentDirectory(), "Output");
+        //     string filePath = Path.Combine(outputDir, fileName);
             
-            if (!System.IO.File.Exists(filePath))
-                return NotFound($"File {fileName} not found.");
+        //     if (!System.IO.File.Exists(filePath))
+        //         return NotFound($"File {fileName} not found.");
                 
-            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
-            return File(fileBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
-        }
+        //     byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+        //     return File(fileBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
+        // }
 
-        [HttpGet("sample")]
-        public IActionResult GenerateSampleDocx()
-        {
-            try
-            {
-                // Create a temporary file path
-                string tempFilePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".docx");
+        // [HttpGet("sample")]
+        // public IActionResult GenerateSampleDocx()
+        // {
+        //     try
+        //     {
+        //             string tempFilePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".docx");
                 
-                // Create the Word document
-                using (WordprocessingDocument wordDoc = WordprocessingDocument.Create(tempFilePath, WordprocessingDocumentType.Document))
-                {
-                    // Add a main document part
-                    MainDocumentPart mainPart = wordDoc.AddMainDocumentPart();
+        //         using (WordprocessingDocument wordDoc = WordprocessingDocument.Create(tempFilePath, WordprocessingDocumentType.Document))
+        //         {
+        //             MainDocumentPart mainPart = wordDoc.AddMainDocumentPart();
                     
-                    // Create the document structure
-                    mainPart.Document = new Document();
-                    Body body = mainPart.Document.AppendChild(new Body());
+        //             mainPart.Document = new Document();
+        //             Body body = mainPart.Document.AppendChild(new Body());
                     
-                    // Add a title
-                    Paragraph titlePara = body.AppendChild(new Paragraph());
-                    Run titleRun = titlePara.AppendChild(new Run());
-                    Text titleText = titleRun.AppendChild(new Text("Sample Document with XML Placeholders"));
-                    titleRun.RunProperties = new RunProperties(new Bold());
+        //             Paragraph titlePara = body.AppendChild(new Paragraph());
+        //             Run titleRun = titlePara.AppendChild(new Run());
+        //             Text titleText = titleRun.AppendChild(new Text("Sample Document with XML Placeholders"));
+        //             titleRun.RunProperties = new RunProperties(new Bold());
                     
-                    // Add some content with placeholders
-                    body.AppendChild(new Paragraph(new Run(new Text("Court: <# <Content Select=\"./CourtName\" /> #>"))));
-                    body.AppendChild(new Paragraph(new Run(new Text("Address: <# <Content Select=\"./CourtAddress\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("Court: <# <Content Select=\"./CourtName\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("Address: <# <Content Select=\"./CourtAddress\" /> #>"))));
                     
-                    // Applicant information
-                    body.AppendChild(new Paragraph(new Run(new Text("APPLICANT INFORMATION"))));
-                    body.AppendChild(new Paragraph(new Run(new Text("Name: <# <Content Select=\"./Applicant/FirstName\" /> #> <# <Content Select=\"./Applicant/LastName\" /> #>"))));
-                    body.AppendChild(new Paragraph(new Run(new Text("Address: <# <Content Select=\"./Applicant/CurrentAddress\" /> #>"))));
-                    body.AppendChild(new Paragraph(new Run(new Text("Phone: <# <Content Select=\"./Applicant/PhoneNumber\" /> #>"))));
-                    body.AppendChild(new Paragraph(new Run(new Text("Email: <# <Content Select=\"./Applicant/EmailAddress\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("APPLICANT INFORMATION"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("Name: <# <Content Select=\"./Applicant/FirstName\" /> #> <# <Content Select=\"./Applicant/LastName\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("Address: <# <Content Select=\"./Applicant/CurrentAddress\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("Phone: <# <Content Select=\"./Applicant/PhoneNumber\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("Email: <# <Content Select=\"./Applicant/EmailAddress\" /> #>"))));
                     
-                    // Respondent information
-                    body.AppendChild(new Paragraph(new Run(new Text("RESPONDENT INFORMATION"))));
-                    body.AppendChild(new Paragraph(new Run(new Text("Name: <# <Content Select=\"./Respondent/FirstName\" /> #> <# <Content Select=\"./Respondent/LastName\" /> #>"))));
-                    body.AppendChild(new Paragraph(new Run(new Text("Address: <# <Content Select=\"./Respondent/CurrentAddress\" /> #>"))));
-                    body.AppendChild(new Paragraph(new Run(new Text("Phone: <# <Content Select=\"./Respondent/PhoneNumber\" /> #>"))));
-                    body.AppendChild(new Paragraph(new Run(new Text("Email: <# <Content Select=\"./Respondent/EmailAddress\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("RESPONDENT INFORMATION"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("Name: <# <Content Select=\"./Respondent/FirstName\" /> #> <# <Content Select=\"./Respondent/LastName\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("Address: <# <Content Select=\"./Respondent/CurrentAddress\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("Phone: <# <Content Select=\"./Respondent/PhoneNumber\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("Email: <# <Content Select=\"./Respondent/EmailAddress\" /> #>"))));
                     
-                    // Add a table placeholder
-                    body.AppendChild(new Paragraph(new Run(new Text("INCOME SOURCES"))));
-                    body.AppendChild(new Paragraph(new Run(new Text("<# <Table Select=\"./IncomesSources\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("INCOME SOURCES"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("<# <Table Select=\"./IncomesSources\" /> #>"))));
                     
-                    // Add another table placeholder
-                    body.AppendChild(new Paragraph(new Run(new Text("OTHER BENEFITS"))));
-                    body.AppendChild(new Paragraph(new Run(new Text("<# <Table Select=\"./IncomesOther\" /> #>"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("OTHER BENEFITS"))));
+        //             body.AppendChild(new Paragraph(new Run(new Text("<# <Table Select=\"./IncomesOther\" /> #>"))));
                     
-                    // Save the document
-                    mainPart.Document.Save();
-                }
+        //             mainPart.Document.Save();
+        //         }
                 
-                // Read the file and return it
-                byte[] fileBytes = System.IO.File.ReadAllBytes(tempFilePath);
+        //         byte[] fileBytes = System.IO.File.ReadAllBytes(tempFilePath);
                 
-                // Clean up the temp file
-                System.IO.File.Delete(tempFilePath);
+        //         System.IO.File.Delete(tempFilePath);
                 
-                return File(fileBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "sample_template.docx");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error generating sample document");
-                return StatusCode(500, $"Error generating sample document: {ex.Message}");
-            }
-        }
+        //         return File(fileBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "sample_template.docx");
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         _logger.LogError(ex, "Error generating sample document");
+        //         return StatusCode(500, $"Error generating sample document: {ex.Message}");
+        //     }
+        // }
 
         private void FindAndProcessTablePlaceholders(Body body, XDocument dataXml)
         {
-            // Regex to match table placeholders
             Regex tableRegex = new Regex("<#\\s*<Table\\s+Select\\s*=\\s*[\\\"|'](.*?)[\\\"|']\\s*/>\\s*#>");
             
-            // Build a flat list of all elements in the document
             var allElements = body.Descendants().ToList();
             
-            // Create a list to track placeholders and their locations
-            var placeholders = new List<(Paragraph Paragraph, string Placeholder, string XPath, int ElementIndex)>();
+                var placeholders = new List<(Paragraph Paragraph, string Placeholder, string XPath, int ElementIndex)>();
             
-            // Find all paragraphs with table placeholders
             for (int i = 0; i < allElements.Count; i++)
             {
                 if (allElements[i] is Paragraph paragraph)
@@ -585,7 +505,6 @@ namespace OpenXmlMergeApi.Controllers
                             string placeholder = match.Value;
                             string xpath = match.Groups[1].Value.Trim();
                             
-                            // Clean up the XPath expression
                             xpath = CleanXPath(xpath);
                             
                             placeholders.Add((paragraph, placeholder, xpath, i));
@@ -595,10 +514,8 @@ namespace OpenXmlMergeApi.Controllers
                 }
             }
             
-            // Process each placeholder
             foreach (var placeholderInfo in placeholders)
             {
-                // Find the nearest table after the placeholder
                 Table? nearestTable = null;
                 
                 for (int i = placeholderInfo.ElementIndex + 1; i < allElements.Count; i++)
@@ -613,14 +530,11 @@ namespace OpenXmlMergeApi.Controllers
                 
                 if (nearestTable != null)
                 {
-                    // Process the table with the XML data
                     UpdateExistingTableWithXmlData(nearestTable, dataXml, placeholderInfo.XPath);
                     
-                    // Replace the placeholder in the paragraph with empty text
                     string paragraphText = GetTextFromParagraph(placeholderInfo.Paragraph);
                     paragraphText = paragraphText.Replace(placeholderInfo.Placeholder, "");
                     
-                    // Update the paragraph
                     placeholderInfo.Paragraph.RemoveAllChildren<Run>();
                     if (!string.IsNullOrWhiteSpace(paragraphText))
                     {
@@ -638,7 +552,6 @@ namespace OpenXmlMergeApi.Controllers
         {
             try
             {
-                // Split the XPath into parts
                 var parts = xpath.Split('/').Where(p => !string.IsNullOrEmpty(p)).ToArray();
                 
                 XElement? tableElement = xml.Root;
@@ -655,12 +568,10 @@ namespace OpenXmlMergeApi.Controllers
                 if (tableElement == null)
                     return;
                 
-                // Get all child elements which will be rows in our table
                 var xmlRows = tableElement.Elements().ToList();
                 if (!xmlRows.Any())
                     return;
                 
-                // Get existing rows in the table
                 var existingRows = table.Elements<TableRow>().ToList();
                 
                 if (existingRows.Count < 2)
@@ -669,11 +580,8 @@ namespace OpenXmlMergeApi.Controllers
                     return;
                 }
                 
-                // Assume the second row is our template row for data
-                // The first row is typically a header row
                 var templateRow = existingRows[1];
                 
-                // Check if the template row contains placeholder cells with ./Something format
                 bool hasPlaceholders = false;
                 foreach (var cell in templateRow.Elements<TableCell>())
                 {
@@ -691,11 +599,9 @@ namespace OpenXmlMergeApi.Controllers
                     return;
                 }
                 
-                // Get column names from first XML row's element names
                 var firstXmlRow = xmlRows.First();
                 var columnNames = firstXmlRow.Elements().Select(e => e.Name.LocalName).ToList();
                 
-                // Create mapping between XML column names and table cell placeholders
                 var columnMapping = new Dictionary<string, int>();
                 var cells = templateRow.Elements<TableCell>().ToList();
                 
@@ -704,7 +610,7 @@ namespace OpenXmlMergeApi.Controllers
                     string cellText = GetTextFromCell(cells[i]);
                     if (cellText.StartsWith("./"))
                     {
-                        string placeholder = cellText.Substring(2); // Remove ./
+                            string placeholder = cellText.Substring(2);
                         if (columnNames.Contains(placeholder))
                         {
                             columnMapping[placeholder] = i;
@@ -718,37 +624,29 @@ namespace OpenXmlMergeApi.Controllers
                     return;
                 }
                 
-                // Save the template row properties before removing it
                 var templateRowProps = templateRow.TableRowProperties?.CloneNode(true) as TableRowProperties;
                 
-                // Save the cell properties from each template cell
                 var templateCellProps = new List<TableCellProperties?>();
                 foreach (var cell in cells)
                 {
                     templateCellProps.Add(cell.TableCellProperties?.CloneNode(true) as TableCellProperties);
                 }
                 
-                // Remove the template row since we'll replace it with actual data
                 templateRow.Remove();
                 
-                // Add data rows based on XML
                 foreach (var xmlRow in xmlRows)
                 {
-                    // Create a new row with the same properties as the template
                     TableRow newRow = new TableRow();
                     
-                    // Apply the saved row properties if available
                     if (templateRowProps != null)
                     {
                         newRow.AppendChild(templateRowProps.CloneNode(true));
                     }
                     
-                    // Add the same number of cells as in the template
                     for (int i = 0; i < cells.Count; i++)
                     {
                         string cellValue = "";
                         
-                        // Check if this cell position maps to an XML column
                         foreach (var mapping in columnMapping)
                         {
                             if (mapping.Value == i)
@@ -759,19 +657,16 @@ namespace OpenXmlMergeApi.Controllers
                             }
                         }
                         
-                        // Create a new cell with content
                         TableCell newCell = new TableCell(
                             new Paragraph(new Run(new Text(cellValue)))
                         );
                         
-                        // Apply the saved cell properties to maintain formatting including borders
                         if (i < templateCellProps.Count && templateCellProps[i] != null)
                         {
                             newCell.PrependChild(templateCellProps[i].CloneNode(true));
                         }
                         else
                         {
-                            // Apply default cell properties with borders if no template is available
                             newCell.TableCellProperties = new TableCellProperties(
                                 new TableCellBorders(
                                     new TopBorder() { Val = BorderValues.Single, Size = 4 },
@@ -785,7 +680,6 @@ namespace OpenXmlMergeApi.Controllers
                         newRow.AppendChild(newCell);
                     }
                     
-                    // Add the new row to the table after the header
                     if (existingRows.Count > 0)
                     {
                         table.InsertAfter(newRow, existingRows[0]);

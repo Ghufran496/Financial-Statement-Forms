@@ -37,40 +37,6 @@
         }
       }
     },
-    "/api/DocumentMerge/download/{fileName}": {
-      "get": {
-        "tags": [
-          "DocumentMerge"
-        ],
-        "parameters": [
-          {
-            "name": "fileName",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/DocumentMerge/sample": {
-      "get": {
-        "tags": [
-          "DocumentMerge"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/WeatherForecast": {
       "get": {
         "tags": [

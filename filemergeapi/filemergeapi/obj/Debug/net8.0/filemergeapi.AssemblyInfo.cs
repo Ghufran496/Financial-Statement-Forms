@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("filemergeapi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43c0c5f910f69962093816276e95879ab4082f54")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4196f81df7ccbe71035d11dbd2601d0bf34b24b8")]
 [assembly: System.Reflection.AssemblyProductAttribute("filemergeapi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("filemergeapi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

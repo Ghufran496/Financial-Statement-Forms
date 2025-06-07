@@ -1,22 +1,6 @@
 [
   {
     "ContainingType": "OpenXmlMergeApi.Controllers.DocumentMergeController",
-    "Method": "DownloadFile",
-    "RelativePath": "api/DocumentMerge/download/{fileName}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "fileName",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "OpenXmlMergeApi.Controllers.DocumentMergeController",
     "Method": "MergeDocx",
     "RelativePath": "api/DocumentMerge/merge",
     "HttpMethod": "POST",
@@ -29,16 +13,6 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "OpenXmlMergeApi.Controllers.DocumentMergeController",
-    "Method": "GenerateSampleDocx",
-    "RelativePath": "api/DocumentMerge/sample",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {
