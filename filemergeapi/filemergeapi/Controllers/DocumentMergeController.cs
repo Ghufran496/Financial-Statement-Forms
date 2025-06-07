@@ -89,6 +89,11 @@ namespace OpenXmlMergeApi.Controllers
             
             // Process the document body
             Body body = mainDocumentPart.Document.Body;
+            
+            // First find all table placeholders so we can process tables
+            FindAndProcessTablePlaceholders(body, dataXml);
+            
+            // Then process content placeholders in paragraphs
             ProcessBodyContent(body, dataXml);
             
             // Save changes
@@ -117,8 +122,9 @@ namespace OpenXmlMergeApi.Controllers
             // Process content placeholders
             ProcessContentPlaceholders(paragraph, paragraphText, dataXml);
             
-            // Process table placeholders
-            ProcessTablePlaceholders(paragraph, paragraphText, dataXml);
+            // We're now handling table placeholders separately at the document level
+            // to avoid duplicating tables
+            // ProcessTablePlaceholders(paragraph, paragraphText, dataXml);
         }
 
         private void ProcessTable(Table table, XDocument dataXml)
@@ -551,6 +557,225 @@ namespace OpenXmlMergeApi.Controllers
                 _logger.LogError(ex, "Error generating sample document");
                 return StatusCode(500, $"Error generating sample document: {ex.Message}");
             }
+        }
+
+        private void FindAndProcessTablePlaceholders(Body body, XDocument dataXml)
+        {
+            // Regex to match table placeholders
+            Regex tableRegex = new Regex("<#\\s*<Table\\s+Select\\s*=\\s*[\\\"|'](.*?)[\\\"|']\\s*/>\\s*#>");
+            
+            // Build a flat list of all elements in the document
+            var allElements = body.Descendants().ToList();
+            
+            // Create a list to track placeholders and their locations
+            var placeholders = new List<(Paragraph Paragraph, string Placeholder, string XPath, int ElementIndex)>();
+            
+            // Find all paragraphs with table placeholders
+            for (int i = 0; i < allElements.Count; i++)
+            {
+                if (allElements[i] is Paragraph paragraph)
+                {
+                    string paragraphText = GetTextFromParagraph(paragraph);
+                    MatchCollection matches = tableRegex.Matches(paragraphText);
+                    
+                    if (matches.Count > 0)
+                    {
+                        foreach (Match match in matches)
+                        {
+                            string placeholder = match.Value;
+                            string xpath = match.Groups[1].Value.Trim();
+                            
+                            // Clean up the XPath expression
+                            xpath = CleanXPath(xpath);
+                            
+                            placeholders.Add((paragraph, placeholder, xpath, i));
+                            _logger.LogInformation($"Found table placeholder: {placeholder} at index {i}");
+                        }
+                    }
+                }
+            }
+            
+            // Process each placeholder
+            foreach (var placeholderInfo in placeholders)
+            {
+                // Find the nearest table after the placeholder
+                Table? nearestTable = null;
+                
+                for (int i = placeholderInfo.ElementIndex + 1; i < allElements.Count; i++)
+                {
+                    if (allElements[i] is Table table)
+                    {
+                        nearestTable = table;
+                        _logger.LogInformation($"Found nearest table at index {i}");
+                        break;
+                    }
+                }
+                
+                if (nearestTable != null)
+                {
+                    // Process the table with the XML data
+                    UpdateExistingTableWithXmlData(nearestTable, dataXml, placeholderInfo.XPath);
+                    
+                    // Replace the placeholder in the paragraph with empty text
+                    string paragraphText = GetTextFromParagraph(placeholderInfo.Paragraph);
+                    paragraphText = paragraphText.Replace(placeholderInfo.Placeholder, "");
+                    
+                    // Update the paragraph
+                    placeholderInfo.Paragraph.RemoveAllChildren<Run>();
+                    if (!string.IsNullOrWhiteSpace(paragraphText))
+                    {
+                        placeholderInfo.Paragraph.AppendChild(new Run(new Text(paragraphText)));
+                    }
+                }
+                else
+                {
+                    _logger.LogWarning($"No table found after placeholder: {placeholderInfo.Placeholder}");
+                }
+            }
+        }
+        
+        private void UpdateExistingTableWithXmlData(Table table, XDocument xml, string xpath)
+        {
+            try
+            {
+                // Split the XPath into parts
+                var parts = xpath.Split('/').Where(p => !string.IsNullOrEmpty(p)).ToArray();
+                
+                XElement? tableElement = xml.Root;
+                foreach (var part in parts)
+                {
+                    tableElement = tableElement?.Elements(part).FirstOrDefault();
+                    if (tableElement == null)
+                    {
+                        _logger.LogWarning($"Table element not found: {part} in path {xpath}");
+                        return;
+                    }
+                }
+                
+                if (tableElement == null)
+                    return;
+                
+                // Get all child elements which will be rows in our table
+                var xmlRows = tableElement.Elements().ToList();
+                if (!xmlRows.Any())
+                    return;
+                
+                // Get existing rows in the table
+                var existingRows = table.Elements<TableRow>().ToList();
+                
+                if (existingRows.Count < 2)
+                {
+                    _logger.LogWarning("Table does not have enough rows to identify the template row");
+                    return;
+                }
+                
+                // Assume the second row is our template row for data
+                // The first row is typically a header row
+                var templateRow = existingRows[1];
+                
+                // Check if the template row contains placeholder cells with ./Something format
+                bool hasPlaceholders = false;
+                foreach (var cell in templateRow.Elements<TableCell>())
+                {
+                    string cellText = GetTextFromCell(cell);
+                    if (cellText.StartsWith("./"))
+                    {
+                        hasPlaceholders = true;
+                        break;
+                    }
+                }
+                
+                if (!hasPlaceholders)
+                {
+                    _logger.LogWarning("Template row does not contain placeholder cells");
+                    return;
+                }
+                
+                // Get column names from first XML row's element names
+                var firstXmlRow = xmlRows.First();
+                var columnNames = firstXmlRow.Elements().Select(e => e.Name.LocalName).ToList();
+                
+                // Create mapping between XML column names and table cell placeholders
+                var columnMapping = new Dictionary<string, int>();
+                var cells = templateRow.Elements<TableCell>().ToList();
+                
+                for (int i = 0; i < cells.Count; i++)
+                {
+                    string cellText = GetTextFromCell(cells[i]);
+                    if (cellText.StartsWith("./"))
+                    {
+                        string placeholder = cellText.Substring(2); // Remove ./
+                        if (columnNames.Contains(placeholder))
+                        {
+                            columnMapping[placeholder] = i;
+                        }
+                    }
+                }
+                
+                if (columnMapping.Count == 0)
+                {
+                    _logger.LogWarning("Could not map XML data to table placeholders");
+                    return;
+                }
+                
+                // Remove the template row since we'll replace it with actual data
+                templateRow.Remove();
+                
+                // Add data rows based on XML
+                foreach (var xmlRow in xmlRows)
+                {
+                    // Clone the template row structure
+                    TableRow newRow = new TableRow();
+                    
+                    // Add the same number of cells as in the template
+                    for (int i = 0; i < cells.Count; i++)
+                    {
+                        string cellValue = "";
+                        
+                        // Check if this cell position maps to an XML column
+                        foreach (var mapping in columnMapping)
+                        {
+                            if (mapping.Value == i)
+                            {
+                                var xmlCell = xmlRow.Element(mapping.Key);
+                                cellValue = xmlCell?.Value ?? string.Empty;
+                                break;
+                            }
+                        }
+                        
+                        TableCell newCell = new TableCell(
+                            new Paragraph(new Run(new Text(cellValue)))
+                        );
+                        newRow.AppendChild(newCell);
+                    }
+                    
+                    // Add the new row to the table after the header
+                    if (existingRows.Count > 0)
+                    {
+                        table.InsertAfter(newRow, existingRows[0]);
+                    }
+                    else
+                    {
+                        table.AppendChild(newRow);
+                    }
+                }
+                
+                _logger.LogInformation($"Updated table with {xmlRows.Count} rows of data");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error updating table from XPath: {xpath}");
+            }
+        }
+        
+        private string GetTextFromCell(TableCell cell)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var paragraph in cell.Elements<Paragraph>())
+            {
+                sb.Append(GetTextFromParagraph(paragraph));
+            }
+            return sb.ToString().Trim();
         }
     }
 }
