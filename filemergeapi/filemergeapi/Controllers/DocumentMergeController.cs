@@ -718,14 +718,30 @@ namespace OpenXmlMergeApi.Controllers
                     return;
                 }
                 
+                // Save the template row properties before removing it
+                var templateRowProps = templateRow.TableRowProperties?.CloneNode(true) as TableRowProperties;
+                
+                // Save the cell properties from each template cell
+                var templateCellProps = new List<TableCellProperties?>();
+                foreach (var cell in cells)
+                {
+                    templateCellProps.Add(cell.TableCellProperties?.CloneNode(true) as TableCellProperties);
+                }
+                
                 // Remove the template row since we'll replace it with actual data
                 templateRow.Remove();
                 
                 // Add data rows based on XML
                 foreach (var xmlRow in xmlRows)
                 {
-                    // Clone the template row structure
+                    // Create a new row with the same properties as the template
                     TableRow newRow = new TableRow();
+                    
+                    // Apply the saved row properties if available
+                    if (templateRowProps != null)
+                    {
+                        newRow.AppendChild(templateRowProps.CloneNode(true));
+                    }
                     
                     // Add the same number of cells as in the template
                     for (int i = 0; i < cells.Count; i++)
@@ -743,9 +759,29 @@ namespace OpenXmlMergeApi.Controllers
                             }
                         }
                         
+                        // Create a new cell with content
                         TableCell newCell = new TableCell(
                             new Paragraph(new Run(new Text(cellValue)))
                         );
+                        
+                        // Apply the saved cell properties to maintain formatting including borders
+                        if (i < templateCellProps.Count && templateCellProps[i] != null)
+                        {
+                            newCell.PrependChild(templateCellProps[i].CloneNode(true));
+                        }
+                        else
+                        {
+                            // Apply default cell properties with borders if no template is available
+                            newCell.TableCellProperties = new TableCellProperties(
+                                new TableCellBorders(
+                                    new TopBorder() { Val = BorderValues.Single, Size = 4 },
+                                    new BottomBorder() { Val = BorderValues.Single, Size = 4 },
+                                    new LeftBorder() { Val = BorderValues.Single, Size = 4 },
+                                    new RightBorder() { Val = BorderValues.Single, Size = 4 }
+                                )
+                            );
+                        }
+                        
                         newRow.AppendChild(newCell);
                     }
                     
