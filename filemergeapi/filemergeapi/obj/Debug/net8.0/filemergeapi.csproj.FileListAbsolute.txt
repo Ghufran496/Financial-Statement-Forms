@@ -89,3 +89,4 @@ D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\r
 D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\Data\data.xml
 D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\bin\Debug\net8.0\filemergeapi.staticwebassets.runtime.json
 D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+D:\Web\Online Work\forms\file merge\filemergeapi\filemergeapi\obj\Debug\net8.0\filemergeapi.sourcelink.json

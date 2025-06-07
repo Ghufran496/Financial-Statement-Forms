@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Web\\Online Work\\forms\\file merge\\filemergeapi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D5726AE5-903A-4C11-99FB-D299E4E614B2}|filemergeapi\\filemergeapi.csproj|d:\\web\\online work\\forms\\file merge\\filemergeapi\\filemergeapi\\data\\data.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{D5726AE5-903A-4C11-99FB-D299E4E614B2}|filemergeapi\\filemergeapi.csproj|solutionrelative:filemergeapi\\data\\data.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D5726AE5-903A-4C11-99FB-D299E4E614B2}|filemergeapi\\filemergeapi.csproj|d:\\web\\online work\\forms\\file merge\\filemergeapi\\filemergeapi\\controllers\\documentmergecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D5726AE5-903A-4C11-99FB-D299E4E614B2}|filemergeapi\\filemergeapi.csproj|solutionrelative:filemergeapi\\controllers\\documentmergecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D5726AE5-903A-4C11-99FB-D299E4E614B2}|filemergeapi\\filemergeapi.csproj|d:\\web\\online work\\forms\\file merge\\filemergeapi\\filemergeapi\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D5726AE5-903A-4C11-99FB-D299E4E614B2}|filemergeapi\\filemergeapi.csproj|solutionrelative:filemergeapi\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D5726AE5-903A-4C11-99FB-D299E4E614B2}|filemergeapi\\filemergeapi.csproj|d:\\web\\online work\\forms\\file merge\\filemergeapi\\filemergeapi\\data\\data.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{D5726AE5-903A-4C11-99FB-D299E4E614B2}|filemergeapi\\filemergeapi.csproj|solutionrelative:filemergeapi\\data\\data.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D5726AE5-903A-4C11-99FB-D299E4E614B2}|filemergeapi\\filemergeapi.csproj|d:\\web\\online work\\forms\\file merge\\filemergeapi\\filemergeapi\\data\\data.xml||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,7 +74,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "D:\\Web\\Online Work\\forms\\file merge\\filemergeapi\\filemergeapi\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "filemergeapi\\Controllers\\WeatherForecastController.cs",
@@ -82,20 +82,20 @@
               "RelativeToolTip": "filemergeapi\\Controllers\\WeatherForecastController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T17:27:49.574Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-06T17:27:49.574Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "data.xml",
               "DocumentMoniker": "D:\\Web\\Online Work\\forms\\file merge\\filemergeapi\\filemergeapi\\Data\\data.xml",
               "RelativeDocumentMoniker": "filemergeapi\\Data\\data.xml",
               "ToolTip": "D:\\Web\\Online Work\\forms\\file merge\\filemergeapi\\filemergeapi\\Data\\data.xml",
               "RelativeToolTip": "filemergeapi\\Data\\data.xml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAC4AAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-06-06T15:43:07.75Z"
+              "WhenOpened": "2025-06-06T15:43:07.75Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -107,7 +107,8 @@
               "RelativeToolTip": "filemergeapi\\Data\\data.xml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-06-06T15:18:24.349Z"
+              "WhenOpened": "2025-06-06T15:18:24.349Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -119,24 +120,25 @@
               "RelativeToolTip": "filemergeapi\\filemergeapi.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-06T15:12:50.438Z"
+              "WhenOpened": "2025-06-06T15:12:50.438Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "DocumentMergeController.cs",
               "DocumentMoniker": "D:\\Web\\Online Work\\forms\\file merge\\filemergeapi\\filemergeapi\\Controllers\\DocumentMergeController.cs",
               "RelativeDocumentMoniker": "filemergeapi\\Controllers\\DocumentMergeController.cs",
               "ToolTip": "D:\\Web\\Online Work\\forms\\file merge\\filemergeapi\\filemergeapi\\Controllers\\DocumentMergeController.cs",
               "RelativeToolTip": "filemergeapi\\Controllers\\DocumentMergeController.cs",
-              "ViewState": "AgIAAJEAAAAAAAAAAAAwwOYBAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAwwKUAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-06T15:10:44.784Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Web\\Online Work\\forms\\file merge\\filemergeapi\\filemergeapi\\Program.cs",
               "RelativeDocumentMoniker": "filemergeapi\\Program.cs",
@@ -144,8 +146,7 @@
               "RelativeToolTip": "filemergeapi\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T15:09:46.006Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-06T15:09:46.006Z"
             }
           ]
         }
